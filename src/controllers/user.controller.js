@@ -197,7 +197,7 @@ const updateAccountDetails=asyncHandler(async (req,res)=>{
     throw new apiError(400,"All fields are required")
   }
 
-  const user=User.findByIdAndUpdate(req.user?._id,{$set:{fullName,email}},{new:true}).select("-password")
+  const user=await User.findByIdAndUpdate(req.user?._id,{$set:{fullName,email}},{new:true}).select("-password")
 
   return res.status(200).json(new apiResponse(200,user,"Account detials Updated Successfully"))
 })
